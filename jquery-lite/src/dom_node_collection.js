@@ -73,6 +73,19 @@ class DOMNodeCollection {
     return new DOMNodeCollection(parents);
   }
 
+  find(selector) {
+    let descendants = [];
+    this.elements.forEach(ele => {
+      descendants = descendants.concat(Array.from(ele.querySelectorAll(selector)));
+    });
+    return new DOMNodeCollection(descendants);
+  }
+
+  remove() {
+    this.elements.forEach(ele => {
+      ele.outerHTML = '';
+    });
+  }
 }
 
 module.exports = DOMNodeCollection;
